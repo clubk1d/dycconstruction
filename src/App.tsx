@@ -121,7 +121,8 @@ function App() {
             playsInline
             className="w-full h-full object-cover"
           >
-            <source src="https://videos.pexels.com/video-files/3129957/3129957-uhd_2560_1440_30fps.mp4" type="video/mp4" />
+            <source src="/videos/construction-bg.mp4" type="video/mp4" />
+            {/* Fallback to online video if local file not found */}
             <source src="https://videos.pexels.com/video-files/3129957/3129957-hd_1920_1080_30fps.mp4" type="video/mp4" />
           </video>
           {/* Dark overlay for better text readability */}
@@ -258,32 +259,32 @@ function App() {
               {
                 title: "Metro Office Complex",
                 category: "Commercial",
-                image: "https://images.pexels.com/photos/830891/pexels-photo-830891.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                image: "/images/project1.jpg"
               },
               {
                 title: "Skyline Residential Tower",
                 category: "Residential",
-                image: "https://images.pexels.com/photos/1115804/pexels-photo-1115804.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                image: "/images/project2.jpg"
               },
               {
                 title: "Industrial Manufacturing Plant",
                 category: "Industrial",
-                image: "https://images.pexels.com/photos/1198171/pexels-photo-1198171.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                image: "/images/project3.jpg"
               },
               {
                 title: "City Bridge Infrastructure",
                 category: "Infrastructure",
-                image: "https://images.pexels.com/photos/3075595/pexels-photo-3075595.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                image: "/images/project4.jpg"
               },
               {
                 title: "Shopping Center Development",
                 category: "Retail",
-                image: "https://images.pexels.com/photos/273209/pexels-photo-273209.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                image: "/images/project5.jpg"
               },
               {
                 title: "Hospital Medical Center",
                 category: "Healthcare",
-                image: "https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                image: "/images/project6.jpg"
               }
             ].map((project, index) => (
               <div 
