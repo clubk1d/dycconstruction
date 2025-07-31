@@ -20,6 +20,18 @@ import {
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+
+  // Array of video sources for continuous playback
+  const videoSources = [
+    '/videos/construction-bg-1.mp4',
+    '/videos/construction-bg-2.mp4',
+    '/videos/construction-bg-3.mp4',
+    // Fallback to online videos if local files don't exist
+    'https://videos.pexels.com/video-files/3129957/3129957-hd_1920_1080_30fps.mp4',
+    'https://videos.pexels.com/video-files/4625634/4625634-hd_1920_1080_30fps.mp4',
+    'https://videos.pexels.com/video-files/3195394/3195394-hd_1920_1080_25fps.mp4'
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,6 +54,20 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Handle video end event to play next video
+  const handleVideoEnd = () => {
+    setCurrentVideoIndex((prevIndex) => 
+      prevIndex === videoSources.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  // Preload next video for smooth transition
+  useEffect(() => {
+    const nextIndex = currentVideoIndex === videoSources.length - 1 ? 0 : currentVideoIndex + 1;
+    const video = document.createElement('video');
+    video.src = videoSources[nextIndex];
+    video.preload = 'metadata';
+  }, [currentVideoIndex, videoSources]);
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -115,18 +141,36 @@ function App() {
         {/* Video Background */}
         <div className="absolute inset-0 w-full h-full">
           <video
+            key={currentVideoIndex}
             autoPlay
             muted
             loop
             playsInline
+            onEnded={handleVideoEnd}
             className="w-full h-full object-cover"
           >
+            <source src={videoSources[currentVideoIndex]} type="video/mp4" />
             <source src="/videos/construction-bg.mp4" type="video/mp4" />
             {/* Fallback to online video if local file not found */}
             <source src="https://videos.pexels.com/video-files/3129957/3129957-hd_1920_1080_30fps.mp4" type="video/mp4" />
           </video>
           {/* Dark overlay for better text readability */}
           <div className="absolute inset-0 bg-black/40"></div>
+          
+          {/* Video indicators */}
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
+            {videoSources.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentVideoIndex(index)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  index === currentVideoIndex 
+                    ? 'bg-orange-500 scale-125' 
+                    : 'bg-white/50 hover:bg-white/75'
+                }`}
+              />
+            ))}
+          </div>
         </div>
         
         {/* Content */}

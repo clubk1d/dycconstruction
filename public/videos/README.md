@@ -12,5 +12,10 @@ Example usage in code:
 </video>
 ```
 
-Current video file needed:
-- construction-bg.mp4 (for hero background)
+Current video files for continuous background:
+- construction-bg-1.mp4 (first video in sequence)
+- construction-bg-2.mp4 (second video in sequence)  
+- construction-bg-3.mp4 (third video in sequence)
+
+Note: You can add as many videos as you want. The system will cycle through them continuously.
+If local files don't exist, it will fallback to online construction videos from Pexels.

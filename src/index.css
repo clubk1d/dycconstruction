@@ -66,6 +66,7 @@ select:focus {
 /* Video background optimizations */
 video {
   filter: brightness(0.7) contrast(1.1);
+  transition: opacity 1s ease-in-out;
 }
 
 /* Text shadow for better readability over video */
